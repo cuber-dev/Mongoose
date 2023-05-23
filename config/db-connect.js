@@ -4,6 +4,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 const collection = require('./controllers/controller');
+const db = { collection }
 
 const doOperation = async (data) => {
   try {
@@ -11,25 +12,25 @@ const doOperation = async (data) => {
 
     switch (action) {
         case 'write-one':
-            await collection.insertOne(query);
+            await db.collection.insertOne(query);
             break;
         case 'write-many':
-            await collection.insertMany(query);
+            await db.collection.insertMany(query);
             break;
         case 'update-one':
-            await collection.updateOne(query);
+            await db.collection.updateOne(query);
             break;
         case 'update-many':
-            await collection.updateMany(query);
+            await db.collection.updateMany(query);
             break;
         case 'read':
-            await collection.readCollections(query);
+            await db.collection.readCollections(query);
             break;
         case 'delete-one':
-            await collection.deleteOne(query);
+            await db.collection.deleteOne(query);
             break;
         case 'delete-many':
-            await collection.deleteMany(query);
+            await db.collection.deleteMany(query);
             break;
         default:
             console.error('Invalid action:', action);
